@@ -1,4 +1,8 @@
 const DataTable = ({ cases }) => {
+    if (cases.length === 0) {
+        return <p className="empty">No results found.</p>;
+    }
+
     return (
         <table className="data-table">
             <thead>

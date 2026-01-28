@@ -3,13 +3,18 @@ import { DashboardContext } from "../context/DashboardContext";
 import KPI from "../components/KPI";
 import ChartCard from "../components/ChartCard";
 import DataTable from "../components/DataTable";
+import Loading from "../components/Loading";
 
 const Dashboard = () => {
-  const { data, loading } = useContext(DashboardContext);
+  const { data, loading, error } = useContext(DashboardContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
 
-  if (loading) return <p>Loading dashboard...</p>;
+  if (loading) return <Loading />;
+
+  if (error) {
+    return <p className="error">Error: {error}</p>;
+  } 
 
   const filteredCases = data.cases.filter((item) => {
     const matchesSearch = 
